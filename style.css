@@ -1,0 +1,32 @@
+:root {
+  --primary-color: #000000;
+  --secondary-color: #ffffff;
+  --link-color: #1a0dab;
+  --font-family: Helvetica, Verdana, Arial, sans-serif;
+  --font-size: 1rem;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0px;
+  text-align: justify;
+  font-size: var(--font-size);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.header {
+  width: 100%;
+  color: white;
+  background: black;
+  text-align: right;
+  padding: 7px;
+  box-sizing: border-box;
+}
+
+.header a {
+  color: white;
+}

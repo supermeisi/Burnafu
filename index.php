@@ -6,6 +6,7 @@ $visitors = 0;
 
 <html>
     <head>
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
         <div class="header">
