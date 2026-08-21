@@ -25,13 +25,15 @@ $visitors = 0;
     <div class="banner">
         <h1>Welcome to the website!</h1>
     </div>
-    <div class="navigation">
-        <h3>Navigation</h3>
-        <ul>
-            <li><a href="/index.php?page=home" rel="nofollow">Home</a></li>
-            <li><a href="/index.php?page=about" rel="nofollow">About</a></li>
-            <li><a href="/index.php?page=contact" rel="nofollow">Contact</a></li>
-        </ul>
+    <div class="wrapper">
+        <div class="navigation">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="/index.php?page=home" rel="nofollow">Home</a></li>
+                <li><a href="/index.php?page=about" rel="nofollow">About</a></li>
+                <li><a href="/index.php?page=contact" rel="nofollow">Contact</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 

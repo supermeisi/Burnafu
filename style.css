@@ -55,6 +55,13 @@ ul li:before {
     background-image: repeating-linear-gradient(lightblue, white);
 }
 
+.wrapper {
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+}
+
 .navigation {
     padding: 5px;
     float: left;
