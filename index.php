@@ -2,12 +2,15 @@
 session_start();
 
 $visitors = 0;
+
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
 ?>
 
 <html>
 
 <head>
     <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -33,6 +36,16 @@ $visitors = 0;
                 <li><a href="/index.php?page=about" rel="nofollow">About</a></li>
                 <li><a href="/index.php?page=contact" rel="nofollow">Contact</a></li>
             </ul>
+        </div>
+          <div class="main">
+            <div class="toolbar">
+                <a href="/index.php?page=create" rel="nofollow">Create</a>
+                <a href="/index.php?page=edit&url=<?php echo $page; ?>" rel="nofollow">Edit</a>
+                <a href="/index.php?page=media&url=<?php echo $page; ?>" rel="nofollow">Media</a>
+                <a href="/index.php?page=forum&discussion&url=<?php echo $page; ?>" rel="nofollow">Discussion</a>
+                <a href="/index.php?page=history&url=<?php echo $page; ?>" rel="nofollow">History</a>
+                <a href="/index.php?page=delete&url=<?php echo $page; ?>" rel="nofollow">Delete</a>
+            </div>
         </div>
     </div>
 </body>

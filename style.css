@@ -73,3 +73,26 @@ ul li:before {
 .navigation ul li {
     margin: 0 5px 5px 0;
 }
+
+.main {
+    float: left;
+    padding: 10px;
+    width: 75%;
+    line-height: 1.5;
+}
+
+.toolbar {
+    padding: 10px;
+    text-align: right;
+    border-bottom: 1px solid gray;
+}
+
+
+.toolbar a {
+    cursor: pointer;
+    margin: 1px;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    border: 2px solid gray;
+}
