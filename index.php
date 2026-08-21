@@ -20,5 +20,8 @@ $visitors = 0;
             <?php endif; ?>
             | Visitors: <?= $visitors; ?>
         </div>
+        <div class="banner">
+            <h1>Welcome to the website!</h1>
+        </div>
     </body>
 </html>
