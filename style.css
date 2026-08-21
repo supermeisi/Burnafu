@@ -1,9 +1,10 @@
 :root {
     --primary-color: #000000;
     --secondary-color: #ffffff;
-    --link-color: #1a0dab;
+    --link-color: SteelBlue;
     --font-family: Helvetica, Verdana, Arial, sans-serif;
     --font-size: 1rem;
+    --banner-color: lightblue;
 }
 
 body {
@@ -52,7 +53,7 @@ ul li:before {
     width: 100%;
     padding: 25px;
     box-sizing: border-box;
-    background-image: repeating-linear-gradient(lightblue, white);
+    background-image: linear-gradient(to bottom, var(--banner-color), var(--secondary-color));
 }
 
 .wrapper {
@@ -94,5 +95,5 @@ ul li:before {
     padding: 5px;
     text-align: center;
     font-size: 14px;
-    border: 2px solid gray;
+    border: 2px solid var(--banner-color);
 }
