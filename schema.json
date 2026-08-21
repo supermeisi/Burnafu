@@ -7,17 +7,18 @@
           "primary_key": true,
           "autoincrement": true
         },
-        "name": {
+        "username": {
           "type": "TEXT",
-          "not_null": true
+          "not_null": true,
+          "unique": true
         },
         "email": {
           "type": "TEXT",
           "not_null": true
         },
-        "age": {
-          "type": "INTEGER",
-          "default": 0
+        "password": {
+          "type": "TEXT",
+          "not_null": true
         },
         "created_at": {
           "type": "TEXT",
@@ -29,48 +30,10 @@
       "indexes": [
         {
           "name": "idx_users_email",
-          "columns": ["email"],
+          "columns": [
+            "email"
+          ],
           "unique": true
-        }
-      ]
-    },
-    "posts": {
-      "columns": {
-        "id": {
-          "type": "INTEGER",
-          "primary_key": true,
-          "autoincrement": true
-        },
-        "user_id": {
-          "type": "INTEGER",
-          "not_null": true
-        },
-        "title": {
-          "type": "TEXT",
-          "not_null": true
-        },
-        "content": {
-          "type": "TEXT"
-        },
-        "published": {
-          "type": "INTEGER",
-          "not_null": true,
-          "default": 0
-        }
-      },
-      "foreign_keys": [
-        {
-          "columns": ["user_id"],
-          "references_table": "users",
-          "references_columns": ["id"],
-          "on_delete": "CASCADE",
-          "on_update": "CASCADE"
-        }
-      ],
-      "indexes": [
-        {
-          "name": "idx_posts_user_id",
-          "columns": ["user_id"]
         }
       ]
     }

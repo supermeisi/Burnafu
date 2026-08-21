@@ -1,43 +1,68 @@
 :root {
-  --primary-color: #000000;
-  --secondary-color: #ffffff;
-  --link-color: #1a0dab;
-  --font-family: Helvetica, Verdana, Arial, sans-serif;
-  --font-size: 1rem;
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --link-color: #1a0dab;
+    --font-family: Helvetica, Verdana, Arial, sans-serif;
+    --font-size: 1rem;
 }
 
 body {
-  font-family: var(--font-family);
-  margin: 0px;
-  text-align: justify;
-  font-size: var(--font-size);
+    font-family: var(--font-family);
+    margin: 0px;
+    text-align: justify;
+    font-size: var(--font-size);
 }
 
 a {
-  color: var(--link-color);
-  text-decoration: none;
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 a:hover {
-  color: orange;
+    color: orange;
+}
+
+ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+ul li {
+    vertical-align: top;
+}
+
+ul li:before {
+    content: "\25B8 \0020 \0020";
 }
 
 .header {
-  width: 100%;
-  color: white;
-  background: black;
-  text-align: right;
-  padding: 7px;
-  box-sizing: border-box;
+    width: 100%;
+    color: white;
+    background: black;
+    text-align: right;
+    padding: 7px;
+    box-sizing: border-box;
 }
 
 .header a {
-  color: white;
+    color: white;
 }
 
 .banner {
-  width: 100%;
-  padding: 25px;
-  box-sizing: border-box;
-  background-image: repeating-linear-gradient(lightblue, white);}
+    width: 100%;
+    padding: 25px;
+    box-sizing: border-box;
+    background-image: repeating-linear-gradient(lightblue, white);
+}
+
+.navigation {
+    padding: 5px;
+    float: left;
+    width: 20%;
+    max-width: 200px;
+    border-right: solid 1px gray;
+}
+
+.navigation ul li {
+    margin: 0 5px 5px 0;
 }
