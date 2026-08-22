@@ -1,15 +1,51 @@
-version: "3.9"
-
 services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-wiki}
+      MYSQL_USER: ${MYSQL_USER:-wiki}
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mysqladmin ping -h 127.0.0.1 -uroot -p"$${MYSQL_ROOT_PASSWORD}" --silent
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
 
   web:
-    image: php:8.3-apache
-
+    build:
+      context: .
+    restart: unless-stopped
     ports:
       - "8086:80"
-
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: ${MYSQL_DATABASE:-wiki}
+      DB_USER: ${MYSQL_USER:-wiki}
+      DB_PASSWORD: "${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}"
+      DB_CHARSET: utf8mb4
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -eu
+      - -c
+      - |
+        php /var/www/html/database.php --destructive
+        exec apache2-foreground
 
-    command: >
-      bash -c "apache2-foreground"
+volumes:
+  mysql-data:

@@ -1,41 +1,53 @@
 {
   "tables": {
     "users": {
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_unicode_ci",
       "columns": {
         "id": {
-          "type": "INTEGER",
-          "primary_key": true,
-          "autoincrement": true
+          "type": "BIGINT UNSIGNED",
+          "nullable": false,
+          "auto_increment": true
         },
         "username": {
-          "type": "TEXT",
-          "not_null": true,
-          "unique": true
+          "type": "VARCHAR(64)",
+          "nullable": false
         },
         "email": {
-          "type": "TEXT",
-          "not_null": true
+          "type": "VARCHAR(254)",
+          "nullable": false
         },
         "password": {
-          "type": "TEXT",
-          "not_null": true
+          "type": "VARCHAR(255)",
+          "nullable": false
         },
         "created_at": {
-          "type": "TEXT",
-          "not_null": true,
+          "type": "DATETIME",
+          "nullable": false,
           "default": "CURRENT_TIMESTAMP",
           "default_raw": true
         },
         "last_online": {
-          "type": "TEXT",
-          "not_null": true,
+          "type": "DATETIME",
+          "nullable": false,
           "default": "CURRENT_TIMESTAMP",
-          "default_raw": true          
+          "default_raw": true
         }
       },
+      "primary_key": [
+        "id"
+      ],
       "indexes": [
         {
-          "name": "idx_users_email",
+          "name": "uq_users_username",
+          "columns": [
+            "username"
+          ],
+          "unique": true
+        },
+        {
+          "name": "uq_users_email",
           "columns": [
             "email"
           ],

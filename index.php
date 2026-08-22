@@ -1,7 +1,15 @@
 <?php
 session_start();
 
-$db = new SQLite3('database.sqlite');
+require_once __DIR__ . '/database_connection.php';
+
+try {
+    $db = createDatabaseConnection();
+} catch (Throwable $exception) {
+    error_log('Database connection failed: ' . $exception->getMessage());
+    http_response_code(503);
+    exit('The database is temporarily unavailable. Please try again later.');
+}
 
 $visitors = 0;
 
