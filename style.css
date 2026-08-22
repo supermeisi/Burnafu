@@ -36,6 +36,23 @@ ul li:before {
     content: "\25B8 \0020 \0020";
 }
 
+table {
+    border-collapse: collapse;
+    border: gray 1px solid;
+    margin: 20px;
+}
+
+table tr {
+    border-bottom: gray 1px solid;
+    border-top: gray 1px solid;
+    padding: 7.5px;
+}
+
+table td {
+    border: gray 1px solid;
+    padding: 7.5px;
+}
+
 .header {
     width: 100%;
     color: white;
