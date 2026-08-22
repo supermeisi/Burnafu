@@ -25,9 +25,7 @@ if (PHP_SAPI !== 'cli') {
 
 require_once __DIR__ . '/database_connection.php';
 
-final class SchemaException extends RuntimeException
-{
-}
+final class SchemaException extends RuntimeException {}
 
 final class MySQLSchemaSynchronizer
 {
@@ -124,7 +122,7 @@ final class MySQLSchemaSynchronizer
 
             $this->log(
                 "[CHANGED COLUMN] {$tableName}.{$columnName}: " .
-                implode(', ', $changes)
+                    implode(', ', $changes)
             );
 
             if ($this->destructive) {
@@ -138,7 +136,7 @@ final class MySQLSchemaSynchronizer
             } else {
                 $this->log(
                     "[SKIPPED] {$tableName}.{$columnName} requires " .
-                    'destructive mode.'
+                        'destructive mode.'
                 );
             }
         }
@@ -199,7 +197,7 @@ final class MySQLSchemaSynchronizer
             } else {
                 $this->log(
                     "[SKIPPED] {$tableName}.{$indexName} requires " .
-                    'destructive mode.'
+                        'destructive mode.'
                 );
             }
         }
@@ -233,7 +231,7 @@ final class MySQLSchemaSynchronizer
         if (!$this->destructive) {
             $this->log(
                 "[SKIPPED] {$tableName} primary key requires " .
-                'destructive mode.'
+                    'destructive mode.'
             );
             return;
         }
@@ -241,7 +239,7 @@ final class MySQLSchemaSynchronizer
         if ($actual !== []) {
             $this->pdo->exec(
                 'ALTER TABLE ' . $this->quoteIdentifier($tableName) .
-                ' DROP PRIMARY KEY'
+                    ' DROP PRIMARY KEY'
             );
         }
 
@@ -252,7 +250,7 @@ final class MySQLSchemaSynchronizer
             );
             $this->pdo->exec(
                 'ALTER TABLE ' . $this->quoteIdentifier($tableName) .
-                " ADD PRIMARY KEY ({$columns})"
+                    " ADD PRIMARY KEY ({$columns})"
             );
         }
     }
@@ -277,7 +275,7 @@ final class MySQLSchemaSynchronizer
         if (!$this->destructive) {
             $this->log(
                 "[SKIPPED] {$tableName} table options require " .
-                'destructive mode.'
+                    'destructive mode.'
             );
             return;
         }
@@ -366,7 +364,7 @@ final class MySQLSchemaSynchronizer
 
         return sprintf(
             "CREATE TABLE %s (\n  %s\n) ENGINE=%s " .
-            'DEFAULT CHARACTER SET %s COLLATE %s',
+                'DEFAULT CHARACTER SET %s COLLATE %s',
             $this->quoteIdentifier($tableName),
             implode(",\n  ", $parts),
             $engine,
@@ -484,7 +482,7 @@ final class MySQLSchemaSynchronizer
     {
         $statement = $this->pdo->prepare(
             'SELECT COUNT(*) FROM information_schema.TABLES ' .
-            'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table'
+                'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table'
         );
         $statement->execute([':table' => $tableName]);
 
@@ -496,10 +494,10 @@ final class MySQLSchemaSynchronizer
     {
         $statement = $this->pdo->prepare(
             'SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, ' .
-            'COLUMN_DEFAULT, EXTRA ' .
-            'FROM information_schema.COLUMNS ' .
-            'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table ' .
-            'ORDER BY ORDINAL_POSITION'
+                'COLUMN_DEFAULT, EXTRA ' .
+                'FROM information_schema.COLUMNS ' .
+                'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table ' .
+                'ORDER BY ORDINAL_POSITION'
         );
         $statement->execute([':table' => $tableName]);
 
@@ -516,10 +514,10 @@ final class MySQLSchemaSynchronizer
     {
         $statement = $this->pdo->prepare(
             'SELECT INDEX_NAME, NON_UNIQUE, COLUMN_NAME ' .
-            'FROM information_schema.STATISTICS ' .
-            'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table ' .
-            "AND INDEX_NAME <> 'PRIMARY' " .
-            'ORDER BY INDEX_NAME, SEQ_IN_INDEX'
+                'FROM information_schema.STATISTICS ' .
+                'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table ' .
+                "AND INDEX_NAME <> 'PRIMARY' " .
+                'ORDER BY INDEX_NAME, SEQ_IN_INDEX'
         );
         $statement->execute([':table' => $tableName]);
 
@@ -543,8 +541,8 @@ final class MySQLSchemaSynchronizer
     {
         $statement = $this->pdo->prepare(
             'SELECT COLUMN_NAME FROM information_schema.KEY_COLUMN_USAGE ' .
-            'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table ' .
-            "AND CONSTRAINT_NAME = 'PRIMARY' ORDER BY ORDINAL_POSITION"
+                'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table ' .
+                "AND CONSTRAINT_NAME = 'PRIMARY' ORDER BY ORDINAL_POSITION"
         );
         $statement->execute([':table' => $tableName]);
 
@@ -556,7 +554,7 @@ final class MySQLSchemaSynchronizer
     {
         $statement = $this->pdo->prepare(
             'SELECT ENGINE, TABLE_COLLATION FROM information_schema.TABLES ' .
-            'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table'
+                'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table'
         );
         $statement->execute([':table' => $tableName]);
         $row = $statement->fetch();
@@ -576,9 +574,9 @@ final class MySQLSchemaSynchronizer
     {
         $statement = $this->pdo->prepare(
             'SELECT TABLE_NAME FROM information_schema.TABLES ' .
-            'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_TYPE = :type ' .
-            'AND LEFT(TABLE_NAME, :prefix_length) <> :backup_prefix ' .
-            'ORDER BY TABLE_NAME'
+                'WHERE TABLE_SCHEMA = DATABASE() AND TABLE_TYPE = :type ' .
+                'AND LEFT(TABLE_NAME, :prefix_length) <> :backup_prefix ' .
+                'ORDER BY TABLE_NAME'
         );
         $statement->execute([
             ':type' => 'BASE TABLE',
@@ -631,11 +629,11 @@ final class MySQLSchemaSynchronizer
 
             $this->pdo->exec(
                 'CREATE TABLE ' . $this->quoteIdentifier($backupName) .
-                ' LIKE ' . $this->quoteIdentifier($tableName)
+                    ' LIKE ' . $this->quoteIdentifier($tableName)
             );
             $this->pdo->exec(
                 'INSERT INTO ' . $this->quoteIdentifier($backupName) .
-                ' SELECT * FROM ' . $this->quoteIdentifier($tableName)
+                    ' SELECT * FROM ' . $this->quoteIdentifier($tableName)
             );
             $this->log("[BACKUP TABLE] {$tableName} -> {$backupName}");
         }
@@ -710,7 +708,7 @@ final class MySQLSchemaSynchronizer
             ) {
                 throw new SchemaException(
                     "AUTO_INCREMENT column {$tableName}." .
-                    $autoIncrementColumns[0] . ' must be in the primary key.'
+                        $autoIncrementColumns[0] . ' must be in the primary key.'
                 );
             }
 
@@ -832,7 +830,7 @@ final class MySQLSchemaSynchronizer
             if (!is_string($columnName) || !isset($definedColumns[$columnName])) {
                 throw new SchemaException(
                     ucfirst($kind) . " on {$tableName} references " .
-                    'an undefined column.'
+                        'an undefined column.'
                 );
             }
         }

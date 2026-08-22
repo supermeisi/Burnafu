@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $insert = $db->prepare(
                 'INSERT INTO users ' .
-                '(username, password, email, created_at, last_online) ' .
-                'VALUES (:username, :password, :email, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+                    '(username, password, email, created_at, last_online) ' .
+                    'VALUES (:username, :password, :email, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
             );
             $insert->execute([
                 ':username' => $username,
@@ -82,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- Register Page -->
- <h1>Register</h1>
- Here you can register to become a member of this Wiki by filling out the form below. After the registration process is completed, you are able to log in and add or edit content. Please keep in mind that the minimum password length is 8 characters. The length of the username must be between 5 and 16 characters. Certain special characters '_!$@#^&-' are allowed for the username, but not in the beginning. 
+<h1>Register</h1>
+Here you can register to become a member of this Wiki by filling out the form below. After the registration process is completed, you are able to log in and add or edit content. Please keep in mind that the minimum password length is 8 characters. The length of the username must be between 5 and 16 characters. Certain special characters '_!$@#^&-' are allowed for the username, but not in the beginning.
 <form action="/index.php?page=register" method="post">
     <table>
         <tr>

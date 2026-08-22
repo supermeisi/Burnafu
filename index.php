@@ -47,7 +47,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
                 <li><a href="/index.php?page=contact" rel="nofollow">Contact</a></li>
             </ul>
         </div>
-          <div class="main">
+        <div class="main">
             <?php if (!isset($_GET['page'])): ?>
                 <div class="toolbar">
                     <a href="/index.php?page=create" rel="nofollow">Create</a>
