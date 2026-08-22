@@ -81,7 +81,7 @@ table td {
 }
 
 .navigation {
-    padding: 5px;
+    padding: 10px;
     float: left;
     width: 20%;
     max-width: 200px;
@@ -94,7 +94,7 @@ table td {
 
 .main {
     float: left;
-    padding: 10px;
+    padding: 20px;
     width: 75%;
     line-height: 1.5;
 }
