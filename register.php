@@ -37,5 +37,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <td><input type="password" id="password2" name="password2" required></td>
         </tr>
     </table>
-    <input type="submit" value="Register">
+    <input type="submit" class="button" value="Register">
 </form>

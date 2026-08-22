@@ -53,6 +53,19 @@ table td {
     padding: 7.5px;
 }
 
+.button {
+    background-color: var(--banner-color);
+    padding: 10px 25px;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    border: solid 2px var(--banner-color)
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
+}
+
 .header {
     width: 100%;
     color: white;
