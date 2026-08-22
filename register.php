@@ -1,16 +1,31 @@
 <?php
 // Save userame and password to sqlite database
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $error = false;
+    $success = true;
 
     $username = $_POST['username'];
     $password = $_POST['password'];
     $email = $_POST['email'];
     $password2 = $_POST['password'];
 
-    if (!$error) {
-    // Hash the password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    if (empty($username) || empty($password) || empty($email) || empty($password2)) {
+        $success = false;
+        $error = 'You have to fill out all fields!';
+    }
+
+    if ($success) {
+        // Hash the password
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $insert = $db->prepare('INSERT INTO users (username, password, email, created_at, last_online) VALUES (:username, :password, :email, DATETIME("now", "localtime"), DATETIME("now", "localtime"))');
+        $insert->bindValue(':username', $username);
+        $insert->bindValue(':password', $password);
+        $insert->bindValue(':email', $email);
+        $insert->execute();   
+        
+        echo 'Registration successful... you can now login and modify content.<p>';
+        echo 'Username: '.$username.'<p>';
+        echo 'E-Mail: '.$email.'<p>';
     }   
 }
 ?>

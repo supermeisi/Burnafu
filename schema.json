@@ -25,6 +25,12 @@
           "not_null": true,
           "default": "CURRENT_TIMESTAMP",
           "default_raw": true
+        },
+        "last_online": {
+          "type": "TEXT",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "default_raw": true          
         }
       },
       "indexes": [

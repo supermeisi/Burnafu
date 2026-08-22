@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$db = new SQLite3('database.sqlite');
+
 $visitors = 0;
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
