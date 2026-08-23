@@ -50,25 +50,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($success) {
-        $to = $email;
-        $subject = "Registration at bujunu.com";
-        $body = "Dear " . $username . "\n\nThank you very much for registering at bujunu.com.\n\nPlease click on the link below to confirm your E-Mail address. If you did not register at our website, you can ignore this E-Mail.\n\n" . $domain . "index.php?register&user=" . $username . "&confirm&token=" . $oken;
+        $token = bin2hex(random_bytes(16));
+        $site_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://')
+            . ($_SERVER['HTTP_HOST'] ?? 'burfanu.com');
+        $confirmation_url = $site_url . '/index.php?page=register&user='
+            . rawurlencode($username)
+            . '&confirm&token='
+            . rawurlencode($token);
 
-        send_email($to, $subject, $body);
-        
         try {
             $insert = $db->prepare(
                 'INSERT INTO users ' .
-                    '(username, password, email, created_at, last_online) ' .
-                    'VALUES (:username, :password, :email, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+                    '(username, password, email, created_at, token, last_online) ' .
+                    'VALUES (:username, :password, :email, CURRENT_TIMESTAMP, :token, CURRENT_TIMESTAMP)'
             );
             $insert->execute([
                 ':username' => $username,
                 ':password' => $hashedPassword,
                 ':email' => $email,
+                ':token' => $token
             ]);
 
-            echo 'Registration successful... you can now login and modify content.<p>';
+            $to = $email;
+            $subject = 'Confirm your registration on burfanu.com';
+            $body = '<p>Dear ' . htmlspecialchars($username, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . ',</p>'
+                . '<p>Thank you for registering at burfanu.com.</p>'
+                . '<p>To complete your registration, please confirm your e-mail address by clicking the link below:</p>'
+                . '<p><a href="' . htmlspecialchars($confirmation_url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">Confirm your e-mail address</a></p>'
+                . '<p>If you did not register for an account, you can safely ignore this e-mail.</p>'
+                . '<p>Best regards,<br>The burfanu.com Team</p>';
+
+            send_email($to, $subject, $body);
+
+            echo 'Registration successful... please confirm your E-Mail address in order to log in.<p>';
             echo 'Username: ' . htmlspecialchars($username, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '<p>';
             echo 'E-Mail: ' . htmlspecialchars($email, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '<p>';
         } catch (PDOException $exception) {

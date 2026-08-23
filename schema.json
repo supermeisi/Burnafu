@@ -28,6 +28,9 @@
           "default": "CURRENT_TIMESTAMP",
           "default_raw": true
         },
+        "token": {
+          "type": "VARCHAR(32)"
+        },
         "is_confirmed": {
           "type": "BOOL",
           "nullable": false,
