@@ -49,14 +49,14 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             </ul>
         </div>
         <div class="main">
-            <?php if (!isset($_GET['page'])): ?>
+            <?php if (isset($_GET['slug']) or !isset($_GET['page'])): ?>
                 <div class="toolbar">
                     <a href="/index.php?page=create" rel="nofollow">Create</a>
                     <a href="/index.php?page=edit&slug=<?php echo $page; ?>" rel="nofollow">Edit</a>
-                    <a href="/index.php?page=media&slug==<?php echo $page; ?>" rel="nofollow">Media</a>
-                    <a href="/index.php?page=forum&discussion&slug==<?php echo $page; ?>" rel="nofollow">Discussion</a>
-                    <a href="/index.php?page=history&slug==<?php echo $page; ?>" rel="nofollow">History</a>
-                    <a href="/index.php?page=delete&slug==<?php echo $page; ?>" rel="nofollow">Delete</a>
+                    <a href="/index.php?page=media&slug=<?php echo $page; ?>" rel="nofollow">Media</a>
+                    <a href="/index.php?page=forum&discussion&slug=<?php echo $page; ?>" rel="nofollow">Discussion</a>
+                    <a href="/index.php?page=history&slug=<?php echo $page; ?>" rel="nofollow">History</a>
+                    <a href="/index.php?page=delete&slug=<?php echo $page; ?>" rel="nofollow">Delete</a>
                 </div>
             <?php endif; ?>
             <!-- Main Content -->
