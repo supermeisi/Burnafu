@@ -57,7 +57,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             </ul>
         </div>
         <div class="main">
-            <?php if (isset($_GET['slug']) or !isset($_GET['page'])): ?>
+            <?php if (isset($_GET['slug']) and !isset($_GET['page'])): ?>
                 <div class="toolbar">
                     <a href="/index.php?page=create" rel="nofollow">Create</a>
                     <a href="/index.php?page=edit&slug=<?php echo $page; ?>" rel="nofollow">Edit</a>
