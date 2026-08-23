@@ -2,6 +2,7 @@
 session_start();
 
 require_once __DIR__ . '/database_connection.php';
+require_once __DIR__ . '/email.php';
 
 try {
     $db = createDatabaseConnection();

@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($success) {
+        
         try {
             $insert = $db->prepare(
                 'INSERT INTO users ' .

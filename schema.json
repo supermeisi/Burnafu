@@ -28,6 +28,17 @@
           "default": "CURRENT_TIMESTAMP",
           "default_raw": true
         },
+        "is_confirmed": {
+          "type": "BOOL",
+          "nullable": false,
+          "default": false
+        },
+        "confirmed_at": {
+          "type": "DATETIME",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "default_raw": true
+        },
         "last_online": {
           "type": "DATETIME",
           "nullable": false,
