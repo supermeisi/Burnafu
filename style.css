@@ -124,6 +124,15 @@ table td {
     line-height: 1.5;
 }
 
+@media only screen and (max-width: 600px) {
+    .navigation ,.main {
+    width: 92%;
+    padding: 5px;
+    margin: 5px;
+    border: 0;
+    }
+}
+
 .toolbar {
     padding: 10px;
     text-align: right;
