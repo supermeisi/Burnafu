@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    $link = "https";
+else 
+    $link = "http";
+    
+$link .= "://";
+$link .= $_SERVER['HTTP_HOST'];
+
 require_once __DIR__ . '/database_connection.php';
 require_once __DIR__ . '/email.php';
 

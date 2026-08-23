@@ -50,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($success) {
+        $to = $email;
+        $subject = "Registration at bujunu.com";
+        $body = "Dear " . $username . "\n\nThank you very much for registering at bujunu.com.\n\nPlease click on the link below to confirm your E-Mail address. If you did not register at our website, you can ignore this E-Mail.\n\n" . $domain . "index.php?register&user=" . $username . "&confirm&token=" . $oken;
+
+        send_email($to, $subject, $body);
         
         try {
             $insert = $db->prepare(
