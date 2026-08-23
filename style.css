@@ -53,6 +53,12 @@ table td {
     padding: 7.5px;
 }
 
+.error {
+    color: var(--secondary-color);
+    background-color: red;
+    padding: 5px;
+}
+
 .button {
     background-color: var(--banner-color);
     padding: 10px 25px;
@@ -117,7 +123,6 @@ table td {
     text-align: right;
     border-bottom: 1px solid gray;
 }
-
 
 .toolbar a {
     cursor: pointer;
