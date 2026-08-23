@@ -1,4 +1,9 @@
 <?php
+$username = '';
+$password = '';
+$password2  = '';
+$email = '';
+
 // Save username and password to the MySQL database.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = true;
@@ -108,19 +113,19 @@ Here you can register to become a member of this Wiki by filling out the form be
     <table>
         <tr>
             <td>Username:</td>
-            <td><input type="text" id="username" name="username" minlength="5" maxlength="16" required></td>
+            <td><input type="text" id="username" name="username" minlength="5" maxlength="16" value="<?= $username ?>" required></td>
         </tr>
         <tr>
             <td>E-Mail:</td>
-            <td><input type="email" id="email" name="email" maxlength="254" required></td>
+            <td><input type="email" id="email" name="email" maxlength="254" value="<?= $email ?>" required></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type="password" id="password" name="password" minlength="8" required></td>
+            <td><input type="password" id="password" name="password" minlength="8" value="<?= $password ?>" required></td>
         </tr>
         <tr>
             <td>Repeat Password:</td>
-            <td><input type="password" id="password2" name="password2" minlength="8" required></td>
+            <td><input type="password" id="password2" name="password2" minlength="8" value="<?= $password2 ?>" required></td>
         </tr>
     </table>
     <input type="submit" class="button" value="Register">
