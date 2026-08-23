@@ -4,6 +4,35 @@ $password = '';
 $password2  = '';
 $email = '';
 
+if (isset($_GET['confirm'], $_GET['user'], $_GET['token'])) {
+    $confirmationUser = trim((string) $_GET['user']);
+    $confirmationToken = (string) $_GET['token'];
+
+    if ($confirmationUser !== '' && $confirmationToken !== '') {
+        try {
+            $confirm = $db->prepare(
+                'UPDATE users
+                 SET is_confirmed = 1
+                 WHERE username = :username
+                   AND token = :token
+                   AND is_confirmed = 0'
+            );
+            $confirm->execute([
+                ':username' => $confirmationUser,
+                ':token' => $confirmationToken,
+            ]);
+
+            if ($confirm->rowCount() > 0) {
+                echo '<p class="success">Your e-mail address has been confirmed successfully.</p>';
+            } else {
+                echo '<p class="error">The confirmation link is invalid or has already been used.</p>';
+            }
+        } catch (PDOException $exception) {
+            echo '<p class="error">The confirmation could not be processed. Please try again later.</p>';
+        }
+    }
+}
+
 // Save username and password to the MySQL database.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = true;
@@ -66,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $insert = $db->prepare(
                 'INSERT INTO users ' .
-                    '(username, password, email, created_at, token, last_online) ' .
-                    'VALUES (:username, :password, :email, CURRENT_TIMESTAMP, :token, CURRENT_TIMESTAMP)'
+                    '(username, password, email, created_at, token, last_online, is_confirmed) ' .
+                    'VALUES (:username, :password, :email, CURRENT_TIMESTAMP, :token, CURRENT_TIMESTAMP, 0)'
             );
             $insert->execute([
                 ':username' => $username,

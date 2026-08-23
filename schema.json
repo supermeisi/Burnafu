@@ -47,6 +47,10 @@
           "nullable": false,
           "default": "CURRENT_TIMESTAMP",
           "default_raw": true
+        },
+        "is_admin": {
+          "type": "BOOL",
+          "default": 0
         }
       },
       "primary_key": [
