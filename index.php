@@ -23,6 +23,20 @@ try {
 $visitors = 0;
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
+$adminExists = false;
+try {
+    $adminExists = (bool) $db->query(
+        'SELECT COUNT(*) FROM users WHERE is_admin = 1'
+    )->fetchColumn();
+} catch (Throwable $exception) {
+    $adminExists = false;
+}
+
+if ($page !== 'setup' && !$adminExists && !isset($_SESSION['username'])) {
+    header('Location: /index.php?page=setup');
+    exit;
+}
 ?>
 
 <html>
@@ -34,6 +48,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 <body>
     <div class="header">
+        <?php if (!$adminExists): ?>
+            <a href="/index.php?page=setup" rel="nofollow">Setup</a> |
+        <?php endif; ?>
         <?php if (!isset($_SESSION['username'])): ?>
             <a href="/index.php?page=register" rel="nofollow">Register</a> |
         <?php endif; ?>
