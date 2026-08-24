@@ -75,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($success) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        if ($hashedPassword === false) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        if ($hashed_password === false) {
             $success = false;
             $error = 'The password could not be secured. Please try again.';
         }
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             $insert->execute([
                 ':username' => $username,
-                ':password' => $hashedPassword,
+                ':password' => $hashed_password,
                 ':email' => $email,
             ]);
 
