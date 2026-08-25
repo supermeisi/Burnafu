@@ -6,9 +6,16 @@ if (isset($_GET['logout'])) {
     echo '<p class="success">You have been logged out.</p>';
 }
 
+if (isset($_SESSION['username'])) {
+    echo '<p class="error">You are already logged in...</p>';
+    exit;
+}
+
 $username = trim((string) ($_POST['username'] ?? ''));
 $password = (string) ($_POST['password'] ?? '');
 $error = '';
+
+$success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username === '' || $password === '') {
@@ -42,9 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $updateOnline->execute([':username' => $user['username']]);
                 } catch (PDOException $exception) {
                     // Ignore timestamp refresh failures and continue the login flow.
+
                 }
 
-                header('Location: /index.php?page=home');
+                echo '<p class="success">Log in successful</p>';
+
                 exit;
             }
         } catch (PDOException $exception) {
